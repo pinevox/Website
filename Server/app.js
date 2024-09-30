@@ -7,9 +7,9 @@ const path = require("path");
 require('express-async-errors');
 
 app.use(express.json()); // JSON parsing for other routes
-// const _dirname = path.dirname('');
-// const buildPath = path.join(_dirname,"../Client/build")
-// app.use(express.static(buildPath))
+const _dirname = path.dirname('');
+const buildPath = path.join(_dirname,"../build")
+app.use(express.static(buildPath))
 
 const authMiddleware = require('./middleware/authentication');
 const { bill } = require('./services/StripeService');
