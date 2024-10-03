@@ -11,6 +11,12 @@ const _dirname = path.dirname('');
 const buildPath = path.join(_dirname,"../build")
 app.use(express.static(buildPath))
 
+// Serve React app for all unknown routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+
+
 const authMiddleware = require('./middleware/authentication');
 const { bill } = require('./services/StripeService');
 const { mandateStatus } = require('./services/GocardlessService');
