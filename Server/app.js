@@ -8,12 +8,12 @@ require('express-async-errors');
 
 app.use(express.json()); // JSON parsing for other routes
 const _dirname = path.dirname('');
-const buildPath = path.join(_dirname,"../build")
+const buildPath = path.join(_dirname,"../Client/build")
 app.use(express.static(buildPath))
 
 // Serve React app for all unknown routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'));
+  res.sendFile(path.join(__dirname, '../Client/build/index.html'));
 });
 
 
@@ -59,7 +59,12 @@ app.use(helmet({
 
 // Updated CORS configuration
 const corsOptions = {
-  origin: ['https://pine-vox-front.vercel.app', 'http://localhost:3006','https://myaccount.pinevox.com', 'http://myaccount.pinevox.com', process.env.VM_FrontendURL],
+  origin: [
+    'https://pine-vox-front.vercel.app',
+    'https://myaccount.pinevox.com', 
+    'http://myaccount.pinevox.com', 
+     process.env.VM_FrontendURL
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
